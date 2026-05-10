@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الكبلز العراقي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Changa', sans-serif;
+            background: #f8f9fa;
+            background-image: radial-gradient(#ff9a9e 0.5px, #f8f9fa 0.5px);
+            background-size: 20px 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            border: 4px solid #ff4d6d;
+            position: relative;
+        }
+
+        h1 { 
+            color: #ff4d6d; 
+            font-size: 28px; 
+            margin-top: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        #question-display {
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #444;
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff0f3;
+            border-radius: 20px;
+            line-height: 1.6;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Changa', sans-serif;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            transition: 0.2s;
+            outline: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 5px rgba(255, 77, 109, 0.5);
+        }
+
+        button:hover {
+            background: #ff758f;
+        }
+
+        .emoji-float {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            animation: floatUp 2s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) opacity(1); }
+            100% { transform: translateY(-100px) opacity(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>لو خيروك - نسخة الكبلز 🇮🇶</h1>
+    
+    <div id="question-display">
+        جاهزين للضحك؟ اضغطوا على الزر وشوفوا الحظ!
+    </div>
+
+    <div class="btn-group">
+        <button id="next-btn">طلعلي سؤال جديد! 😂</button>
+    </div>
+
+    <p style="margin-top: 20px; color: #888; font-size: 14px;">لعبة الصراحة والمواقف المحرجة</p>
+</div>
+
+<script>
+    const questions = [
+        "لو بطلنا نتراسل يوم كامل، منو بينا اللي راح (يطگ فيوزه) أول واحد ويخابر؟",
+        "يا حركة أسويها تخليك تضحك غصباً عليك حتى لو كنت معصب؟",
+        "لو صرنا بفيلم أكشن، منو اللي راح ينهزم ويترك الثاني يواجه العصابة؟ 😂",
+        "يا طبخة أطبخها تحسها 'عقوبة إعدام' لمعدتك؟",
+        "منو بينا اللي يضل صافن بالوجوه بالمطعم وينسى ياكل؟",
+        "لو لگينا مصباح علاء الدين، شنو أول طلب تطلبه بخصوصي؟ (بدون مثالية!)",
+        "يا كلمة عراقية أقولها وتحسها طالعة من حلكي غلط وتضحك عليها؟",
+        "لو فزنا بمليار دينار، تعطيني نص لو تگولي 'الحب لا يقاس بالمال'؟ 😎",
+        "منو بينا اللي ينام وبيده الموبايل ويوقع على وجهه؟",
+        "يا صفة بية تحسها (تراثية) وموجودة بس عند العجايز؟",
+        "لو صرنا عصافير، منو اللي راح يطير يدور أكل ومنو اللي يضل نايم بالعش؟",
+        "منو بينا اللي يضل ساعة يختار لبس وبالأخير يلبس أول شي شافه؟",
+        "يا موقف صار بينا وبقيت تضحك عليه لسنة كاملة؟",
+        "لو خيروك تترك الموبايل أسبوع لو تتركني أسبوع، ليش راح تختار الموبايل؟ 😂"
+    ];
+
+    const btn = document.getElementById('next-btn');
+    const display = document.getElementById('question-display');
+
+    btn.addEventListener('click', () => {
+        // إضافة تأثير انيميشن خفيف عند التغيير
+        display.style.transform = "scale(0.8)";
+        display.style.opacity = "0";
+
+        setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            display.innerText = questions[randomIndex];
+            display.style.transform = "scale(1)";
+            display.style.opacity = "1";
+            
+            // إضافة إيموجي يطير للجمالية
+            createEmoji();
+        }, 200);
+    });
+
+    function createEmoji() {
+        const emojis = ['😂', '❤️', '🔥', '🤣', '🙄'];
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-float';
+        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 80 + 10 + '%';
+        emoji.style.top = '40%';
+        document.querySelector('.container').appendChild(emoji);
+        
+        setTimeout(() => {
+            emoji.remove();
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
