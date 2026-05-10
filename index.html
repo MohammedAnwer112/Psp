@@ -3,115 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة محمد ومي - أسئلة محرجة</title>
+    <title>تحقيق مع مي 🕵️‍♀️</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
 
         body {
             font-family: 'Changa', sans-serif;
-            background: #1a1a1a;
+            background: #000; /* خلفية سوداء */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
-            color: white;
+            overflow: hidden;
         }
 
         .container {
-            background: #2d2d2d;
-            padding: 35px;
-            border-radius: 30px;
-            box-shadow: 0 15px 50px rgba(255, 77, 109, 0.2);
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
             text-align: center;
-            max-width: 450px;
+            max-width: 400px;
             width: 90%;
-            border: 2px solid #ff4d6d;
+            border: 3px solid #ff1493; /* إطار وردي */
         }
 
-        h1 { color: #ff4d6d; font-size: 26px; margin-bottom: 10px; }
-        .names { color: #ffd1d1; font-size: 18px; margin-bottom: 20px; }
+        h1 { color: #ff1493; font-size: 24px; margin-bottom: 5px; }
+        .sub-title { color: #fff; font-size: 14px; margin-bottom: 20px; opacity: 0.8; }
 
-        #question-display {
-            min-height: 160px;
+        #question-box {
+            min-height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
             font-weight: bold;
             color: #fff;
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(255, 77, 109, 0.1);
-            border-radius: 20px;
-            border-right: 5px solid #ff4d6d;
-            line-height: 1.6;
-            transition: 0.3s;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(145deg, #222, #111);
+            border-radius: 15px;
+            border-left: 5px solid #ff1493;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
 
         button {
-            background: #ff4d6d;
+            background: #ff1493;
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 15px;
             font-size: 20px;
             font-weight: bold;
-            border-radius: 15px;
+            border-radius: 12px;
             cursor: pointer;
             width: 100%;
+            font-family: 'Changa', sans-serif;
             transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
         }
 
-        button:active { transform: scale(0.98); }
-        button:hover { background: #ff758f; box-shadow: 0 0 20px rgba(255, 77, 109, 0.4); }
+        button:active { transform: scale(0.95); }
+        button:hover { background: #ff4da6; }
 
-        .warning { font-size: 12px; color: #ffb3c1; margin-top: 15px; }
+        .pink-text { color: #ff1493; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🔥 أسئلة محرجة جداً 🔥</h1>
-    <div class="names">محمد ❤️ مي</div>
+    <h1>تحقيق مع <span class="pink-text">مي</span> 🕵️‍♀️</h1>
+    <div class="sub-title">الأسئلة برعاية محمد 😎</div>
     
-    <div id="question-display">
-        مستعدين للفضيحة؟ <br> اضغطوا على الزر!
+    <div id="question-box">
+        مي.. مستعدة للاعتراف؟ <br> اضغطي وشوفي!
     </div>
 
-    <button id="next-btn">السؤال التالي 💀</button>
-    
-    <div class="warning">ملاحظة: الجواب لازم يكون صريح وبدون زعل!</div>
+    <button onclick="drawQuestion()">السؤال التالي 🔥</button>
 </div>
 
 <script>
-    const questions = [
-        "محمد، شنو أكثر شي يخليك تغار على مي لدرجة تطلع من طورك؟",
-        "مي، شنو الكذبة البيضاء اللي كذبتيها على محمد ولحد الآن ما يعرفها؟",
-        "محمد، لو مي فتشت موبايلك هسه بكل زاوية، شراح تلاقى شي يربكك؟",
-        "مي، بصراحة.. منو أكثر واحد من أصدقاء محمد تحسيه (ثقيل دم) وماتطيقيه؟",
-        "محمد، يا خصلة بمي تنرفزك لدرجة ودك تسوي موبايلك صامت وتنام؟",
-        "مي، شنو أول انطباع 'سيء' أخذتيه عن محمد وأول ما شفتيه؟",
-        "لو خيروكم: تنهون علاقتكم هسه لو كل واحد ينطي الباسورد مال فيسبوك للثاني؟",
-        "محمد، شوكت آخر مرة فكرت تسوي (بلوك) لمي ب لحظة عصبية؟",
-        "مي، لو محمد صار (مفلس) لمدة سنة، تبقين وياه لو 'الحب ما يوكّل خبز'؟",
-        "منو بينا اللي ريحته من يگعد من النوم تخلي الثاني يطفر من الغرفة؟ 😂",
-        "محمد، شنو الحركة اللي تسويها مي وتحسها 'دلع زايد' وما لايق عليها؟",
-        "مي، يا سر حكاه الج محمد ورحتي كلتيه لصديقتج المقربة فوراً؟",
-        "محمد، لو مي طلبت منك تبيع سيارتك أو أغلى شي عندك علمود تسافرون، تسويها؟",
-        "بصراحة، منو بينا اللي 'عينه زايغة' أكثر بالسوق أو بالمولات؟ 🌚"
+    const pool = [
+        // سؤالك المتكرر
+        "وردي لو أسود؟ 🤔",
+        "وردي لو أسود؟ 🌚",
+        "وردي لو أسود؟ (جاوبي بسرعة!)",
+        "وردي لو أسود؟",
+        
+        // أسئلة موجهة لمي
+        "مي، شنو أكثر شي يخليج تغارين على محمد وتسوين مشكلة من لا شيء؟",
+        "مي، لو محمد كال لغيج سدي الموبايل هسه، تسديه لو تبقين تعاندين؟",
+        "مي، بصراحة منو الي يسيطر على الثاني أكثر، أنتي لو محمد؟",
+        "مي، يا طبع بمحمد يخليج تبتسمين غصباً عنج حتى لو كنتِ زعلانة؟",
+        "مي، شنو الكلمة الي من يقولها محمد تدوخين وتنسين العتب؟",
+        "مي، لو شفتي بنية حطت لايك لمحمد، شنو أول رد فعل تسويه؟ 💀",
+        "مي، يا سر ضامته على محمد وتخافين يعرفه ويضحك عليج؟",
+        "مي، بصراحة.. هم غسلتي مواعين وأنتي تفكرين بمحمد؟ 😂",
+        "مي، لو خيروج تروحين سفرة وحدج لو تاخذين محمد وياج بس هو يدفع الحساب؟",
+        "مي، شنو أكثر حركة يسويها محمد تنرفزج بس ما تحجين؟"
     ];
 
-    const btn = document.getElementById('next-btn');
-    const display = document.getElementById('question-display');
-
-    btn.addEventListener('click', () => {
-        display.style.opacity = "0";
+    function drawQuestion() {
+        const box = document.getElementById('question-box');
+        
+        // تأثير اهتزاز بسيط عند التغيير
+        box.style.transform = "rotate(-2deg)";
+        
         setTimeout(() => {
-            const randomIndex = Math.floor(Math.random() * questions.length);
-            display.innerText = questions[randomIndex];
-            display.style.opacity = "1";
-        }, 200);
-    });
+            const randomIndex = Math.floor(Math.random() * pool.length);
+            box.innerText = pool[randomIndex];
+            box.style.transform = "rotate(0deg)";
+            
+            // تغيير لون النص إذا كان السؤال هو المتكرر
+            if(pool[randomIndex].includes("وردي لو أسود")) {
+                box.style.color = "#ff1493";
+            } else {
+                box.style.color = "#fff";
+            }
+        }, 100);
+    }
 </script>
 
 </body>
