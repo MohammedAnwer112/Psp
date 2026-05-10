@@ -3,61 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الكبلز العراقي</title>
+    <title>لعبة محمد ومي - أسئلة محرجة</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
 
         body {
             font-family: 'Changa', sans-serif;
-            background: #f8f9fa;
-            background-image: radial-gradient(#ff9a9e 0.5px, #f8f9fa 0.5px);
-            background-size: 20px 20px;
+            background: #1a1a1a;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            color: white;
         }
 
         .container {
-            background: white;
-            padding: 40px;
+            background: #2d2d2d;
+            padding: 35px;
             border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 50px rgba(255, 77, 109, 0.2);
             text-align: center;
             max-width: 450px;
             width: 90%;
-            border: 4px solid #ff4d6d;
-            position: relative;
+            border: 2px solid #ff4d6d;
         }
 
-        h1 { 
-            color: #ff4d6d; 
-            font-size: 28px; 
-            margin-top: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
+        h1 { color: #ff4d6d; font-size: 26px; margin-bottom: 10px; }
+        .names { color: #ffd1d1; font-size: 18px; margin-bottom: 20px; }
 
         #question-display {
-            min-height: 150px;
+            min-height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
             font-weight: bold;
-            color: #444;
+            color: #fff;
             margin: 20px 0;
             padding: 20px;
-            background: #fff0f3;
+            background: rgba(255, 77, 109, 0.1);
             border-radius: 20px;
+            border-right: 5px solid #ff4d6d;
             line-height: 1.6;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            transition: 0.3s;
         }
 
         button {
@@ -67,102 +56,62 @@
             padding: 15px 30px;
             font-size: 20px;
             font-weight: bold;
-            border-radius: 50px;
+            border-radius: 15px;
             cursor: pointer;
-            font-family: 'Changa', sans-serif;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            width: 100%;
             transition: 0.2s;
-            outline: none;
         }
 
-        button:active {
-            transform: scale(0.95);
-            box-shadow: 0 2px 5px rgba(255, 77, 109, 0.5);
-        }
+        button:active { transform: scale(0.98); }
+        button:hover { background: #ff758f; box-shadow: 0 0 20px rgba(255, 77, 109, 0.4); }
 
-        button:hover {
-            background: #ff758f;
-        }
-
-        .emoji-float {
-            position: absolute;
-            font-size: 24px;
-            pointer-events: none;
-            animation: floatUp 2s ease-out forwards;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) opacity(1); }
-            100% { transform: translateY(-100px) opacity(0); }
-        }
+        .warning { font-size: 12px; color: #ffb3c1; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>لو خيروك - نسخة الكبلز 🇮🇶</h1>
+    <h1>🔥 أسئلة محرجة جداً 🔥</h1>
+    <div class="names">محمد ❤️ مي</div>
     
     <div id="question-display">
-        جاهزين للضحك؟ اضغطوا على الزر وشوفوا الحظ!
+        مستعدين للفضيحة؟ <br> اضغطوا على الزر!
     </div>
 
-    <div class="btn-group">
-        <button id="next-btn">طلعلي سؤال جديد! 😂</button>
-    </div>
-
-    <p style="margin-top: 20px; color: #888; font-size: 14px;">لعبة الصراحة والمواقف المحرجة</p>
+    <button id="next-btn">السؤال التالي 💀</button>
+    
+    <div class="warning">ملاحظة: الجواب لازم يكون صريح وبدون زعل!</div>
 </div>
 
 <script>
     const questions = [
-        "لو بطلنا نتراسل يوم كامل، منو بينا اللي راح (يطگ فيوزه) أول واحد ويخابر؟",
-        "يا حركة أسويها تخليك تضحك غصباً عليك حتى لو كنت معصب؟",
-        "لو صرنا بفيلم أكشن، منو اللي راح ينهزم ويترك الثاني يواجه العصابة؟ 😂",
-        "يا طبخة أطبخها تحسها 'عقوبة إعدام' لمعدتك؟",
-        "منو بينا اللي يضل صافن بالوجوه بالمطعم وينسى ياكل؟",
-        "لو لگينا مصباح علاء الدين، شنو أول طلب تطلبه بخصوصي؟ (بدون مثالية!)",
-        "يا كلمة عراقية أقولها وتحسها طالعة من حلكي غلط وتضحك عليها؟",
-        "لو فزنا بمليار دينار، تعطيني نص لو تگولي 'الحب لا يقاس بالمال'؟ 😎",
-        "منو بينا اللي ينام وبيده الموبايل ويوقع على وجهه؟",
-        "يا صفة بية تحسها (تراثية) وموجودة بس عند العجايز؟",
-        "لو صرنا عصافير، منو اللي راح يطير يدور أكل ومنو اللي يضل نايم بالعش؟",
-        "منو بينا اللي يضل ساعة يختار لبس وبالأخير يلبس أول شي شافه؟",
-        "يا موقف صار بينا وبقيت تضحك عليه لسنة كاملة؟",
-        "لو خيروك تترك الموبايل أسبوع لو تتركني أسبوع، ليش راح تختار الموبايل؟ 😂"
+        "محمد، شنو أكثر شي يخليك تغار على مي لدرجة تطلع من طورك؟",
+        "مي، شنو الكذبة البيضاء اللي كذبتيها على محمد ولحد الآن ما يعرفها؟",
+        "محمد، لو مي فتشت موبايلك هسه بكل زاوية، شراح تلاقى شي يربكك؟",
+        "مي، بصراحة.. منو أكثر واحد من أصدقاء محمد تحسيه (ثقيل دم) وماتطيقيه؟",
+        "محمد، يا خصلة بمي تنرفزك لدرجة ودك تسوي موبايلك صامت وتنام؟",
+        "مي، شنو أول انطباع 'سيء' أخذتيه عن محمد وأول ما شفتيه؟",
+        "لو خيروكم: تنهون علاقتكم هسه لو كل واحد ينطي الباسورد مال فيسبوك للثاني؟",
+        "محمد، شوكت آخر مرة فكرت تسوي (بلوك) لمي ب لحظة عصبية؟",
+        "مي، لو محمد صار (مفلس) لمدة سنة، تبقين وياه لو 'الحب ما يوكّل خبز'؟",
+        "منو بينا اللي ريحته من يگعد من النوم تخلي الثاني يطفر من الغرفة؟ 😂",
+        "محمد، شنو الحركة اللي تسويها مي وتحسها 'دلع زايد' وما لايق عليها؟",
+        "مي، يا سر حكاه الج محمد ورحتي كلتيه لصديقتج المقربة فوراً؟",
+        "محمد، لو مي طلبت منك تبيع سيارتك أو أغلى شي عندك علمود تسافرون، تسويها؟",
+        "بصراحة، منو بينا اللي 'عينه زايغة' أكثر بالسوق أو بالمولات؟ 🌚"
     ];
 
     const btn = document.getElementById('next-btn');
     const display = document.getElementById('question-display');
 
     btn.addEventListener('click', () => {
-        // إضافة تأثير انيميشن خفيف عند التغيير
-        display.style.transform = "scale(0.8)";
         display.style.opacity = "0";
-
         setTimeout(() => {
             const randomIndex = Math.floor(Math.random() * questions.length);
             display.innerText = questions[randomIndex];
-            display.style.transform = "scale(1)";
             display.style.opacity = "1";
-            
-            // إضافة إيموجي يطير للجمالية
-            createEmoji();
         }, 200);
     });
-
-    function createEmoji() {
-        const emojis = ['😂', '❤️', '🔥', '🤣', '🙄'];
-        const emoji = document.createElement('div');
-        emoji.className = 'emoji-float';
-        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        emoji.style.left = Math.random() * 80 + 10 + '%';
-        emoji.style.top = '40%';
-        document.querySelector('.container').appendChild(emoji);
-        
-        setTimeout(() => {
-            emoji.remove();
-        }, 2000);
-    }
 </script>
 
 </body>
